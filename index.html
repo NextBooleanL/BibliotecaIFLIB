@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca IFLib</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: #333;
+      color: #f0f0f0;
+    }
+
+    header {
+      background-color: #007bff;
+      color: #fff;
+      padding: 15px 0;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      width: 200px;
+      height: 100%;
+      background-color: #007bff;
+      padding: 15px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      z-index: 1;
+    }
+
+    .sidebar a, .sidebar button {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 4px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .sidebar a.active, .sidebar button.active {
+      background-color: #0056b3;
+    }
+
+    .sidebar a:hover, .sidebar button:hover {
+      background-color: #0056b3;
+      color: #fff;
+    }
+
+    .sidebar a, .sidebar button {
+      font-size: 16px;
+    }
+
+    .main-content {
+      margin-left: 200px;
+      padding: 20px;
+      width: calc(100% - 200px);
+    }
+
+    .tabcontent {
+      display: none;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      transition: opacity 0.3s;
+    }
+
+    .tabcontent.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .dark-mode .tabcontent {
+      background-color: #444;
+      color: #f0f0f0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .button {
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px 0;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="file"] {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+      align-self: flex-start;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Biblioteca IFLib</h1>
+  </header>
+
+  <div class="container">
+    <div class="sidebar">
+      <button class="button toggle-dark-mode">Modo Escuro</button>
+      <a href="#" data-url="login" class="tab-link">Login</a>
+      <a href="#" data-url="cadastro" class="tab-link">Cadastro</a>
+      <a href="#" data-url="livros" class="tab-link">Livros</a>
+      <a href="#" data-url="livrosConsulta" class="tab-link">Livros Consultados</a>
+      <a href="#" data-url="alunos" class="tab-link">Alunos</a>
+      <a href="#" data-url="multa" class="tab-link">Multa</a>
+      <a href="#" data-url="retirada" class="tab-link">Retirada</a>
+      <a href="#" data-url="perfil" class="tab-link">Perfil</a>
+      <button class="button go-back">Voltar</button>
+    </div>
+
+    <div class="main-content">
+      <!-- Conteúdo das abas -->
+      <div id="login" class="tabcontent">
+        <h2>Login</h2>
+        <form action="dashboard.html">
+          <label for="username">Usuário:</label>
+          <input type="text" id="username" name="username" required>
+          <label for="password">Senha:</label>
+          <input type="password" id="password" name="password" required>
+          <button type="submit">Entrar</button>
+        </form>
+        <p><a href="#" data-url="cadastro" class="tab-link">Criar conta</a></p>
+        <p><a href="#">Esqueci minha senha</a></p>
+      </div>
+
+      <div id="cadastro" class="tabcontent">
+        <h2>Cadastro de Usuário</h2>
+        <form action="dashboard.html">
+          <label for="name">Nome:</label>
+          <input type="text" id="name" name="name" required>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+          <label for="password">Senha:</label>
+          <input type="password" id="password" name="password" required>
+          <button type="submit">Cadastrar</button>
+        </form>
+        <p><a href="#" data-url="login" class="tab-link">Voltar para o login</a></p>
+      </div>
+
+      <div id="livros" class="tabcontent">
+        <h2>Cadastro de Livros</h2>
+        <form action="livro_cadastrado.html" onsubmit="cadastrarLivro(event)">
+          <label for="nomeLivro">Nome do Livro:</label>
+          <input type="text" id="nomeLivro" name="nomeLivro" required>
+          <label for="autorLivro">Autor do Livro:</label>
+          <input type="text" id="autorLivro" name="autorLivro" required>
+          <label for="codigoBarras">Código de Barras:</label>
+          <input type="text" id="codigoBarras" name="codigoBarras" required>
+          <label for="quantidade">Quantidade:</label>
+          <input type="number" id="quantidade" name="quantidade" required>
+          <button type="submit">Cadastrar Livro</button>
+        </form>
+        <p><a href="#" data-url="livrosConsulta" class="tab-link">Ver lista de livros cadastrados</a></p>
+      </div>
+
+      <div id="livrosConsulta" class="tabcontent">
+        <h2>Lista de Livros Cadastrados</h2>
+        <!-- Conteúdo da tabela de livros -->
+        <table>
+          <thead>
+            <tr>
+              <th>Nome do Livro</th>
+              <th>Autor</th>
+              <th>Código de Barras</th>
+              <th>Quantidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Dados dos livros cadastrados -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="alunos" class="tabcontent">
+        <h2>Cadastro de Alunos</h2>
+        <form action="aluno_cadastrado.html">
+          <label for="nome_aluno">Nome:</label>
+          <input type="text" id="nome_aluno" name="nome_aluno" required>
+          <label for="matricula">Matrícula:</label>
+          <input type="text" id="matricula" name="matricula" required>
+          <label for="curso">Curso:</label>
+          <input type="text" id="curso" name="curso" required>
+          <button type="submit">Cadastrar Aluno</button>
+        </form>
+      </div>
+
+      <div id="multa" class="tabcontent">
+        <h2>Gerenciar Multa</h2>
+        <form action="multa_gerenciada.html" onsubmit="gerenciarMulta(event)">
+          <label for="nome_aluno_multa">Nome do Aluno:</label>
+          <input type="text" id="nome_aluno_multa" name="nome_aluno_multa" required>
+          <label for="livro">Livro:</label>
+          <input type="text" id="livro" name="livro" required>
+          <label for="valor_multa">Valor da Multa:</label>
+          <input type="number" id="valor_multa" name="valor_multa" required>
+          <button type="submit">Aplicar Multa</button>
+        </form>
+      </div>
+
+      <div id="retirada" class="tabcontent">
+        <h2>Retirada de Livro</h2>
+        <form action="livro_retirado.html" onsubmit="retirarLivro(event)">
+          <label for="nome_aluno_retirada">Nome do Aluno:</label>
+          <input type="text" id="nome_aluno_retirada" name="nome_aluno_retirada" required>
+          <label for="livro_retirada">Livro:</label>
+          <input type="text" id="livro_retirada" name="livro_retirada" required>
+          <button type="submit">Retirar Livro</button>
+        </form>
+      </div>
+
+      <div id="perfil" class="tabcontent">
+        <h2>Meu Perfil</h2>
+        <form action="perfil_atualizado.html" onsubmit="atualizarPerfil(event)">
+          <label for="perfilNome">Nome:</label>
+          <input type="text" id="perfilNome" name="perfilNome" value="Usuário Exemplo">
+          <label for="perfilEmail">Email:</label>
+          <input type="email" id="perfilEmail" name="perfilEmail" value="usuario@example.com">
+          <label for="perfilSenha">Nova Senha:</label>
+          <input type="password" id="perfilSenha" name="perfilSenha">
+          <label for="perfilFoto">Foto:</label>
+          <input type="file" id="perfilFoto" name="perfilFoto">
+          <button type="submit">Atualizar Perfil</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Função para abrir a aba
+      function openTab(tabId) {
+        document.querySelectorAll('.tabcontent').forEach(tab => {
+          tab.classList.remove('active');
+        });
+        document.getElementById(tabId).classList.add('active');
+        document.querySelectorAll('.sidebar a').forEach(link => {
+          link.classList.remove('active');
+        });
+        document.querySelector(`.sidebar a[data-url="${tabId}"]`).classList.add('active');
+      }
+
+      // Função para alternar o modo escuro
+      function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+      }
+
+      // Função para voltar à aba anterior
+      function goBack() {
+        window.history.back();
+      }
+
+      // Configurar eventos de clique para os links da sidebar
+      document.querySelectorAll('.sidebar a').forEach(link => {
+        link.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          const tabId = this.getAttribute('data-url');
+          openTab(tabId);
+        });
+      });
+
+      // Configurar o botão "Modo Escuro"
+      document.querySelector('.toggle-dark-mode').addEventListener('click', toggleDarkMode);
+
+      // Configurar o botão "Voltar"
+      document.querySelector('.go-back').addEventListener('click', goBack);
+
+      // Mostrar a aba inicial ao carregar a página (Login)
+      openTab('login');
+    });
+
+    // Funções de manipulação de formulários
+    function cadastrarLivro(event) {
+      event.preventDefault();
+      console.log('Livro cadastrado!');
+    }
+
+    function cadastrarAluno(event) {
+      event.preventDefault();
+      console.log('Aluno cadastrado!');
+    }
+
+    function gerenciarMulta(event) {
+      event.preventDefault();
+      console.log('Multa gerenciada!');
+    }
+
+    function retirarLivro(event) {
+      event.preventDefault();
+      console.log('Livro retirado!');
+    }
+
+    function atualizarPerfil(event) {
+      event.preventDefault();
+      console.log('Perfil atualizado!');
+    }
+  </script>
+</body>
+</html>
